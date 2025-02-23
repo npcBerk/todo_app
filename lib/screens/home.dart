@@ -1,13 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:todo_app/constants/color.dart';
+import 'package:todo_app/constants/task_type.dart';
+import 'package:todo_app/models/task.dart';
 import 'package:todo_app/screens/add_new_task.dart';
 import 'package:todo_app/widgets/todo.dart';
 
+//List<String> todo = ["Study Lessons", "Run 5K", "Go to party"];
+//List<String> completed = ["Game meetup", "Take out trash"];
 
-List<String> todo = ["Study Lessons", "Run 5K", "Go to party"];
-List<String> completed = ["Game meetup", "Take out trash"];
+List<Task> todo = [
+  Task(
+    type: TaskType.notes,
+    title: "Study Lessons",
+    description: "Study CS150",
+    isCompleted: false,
+  ),
+  Task(
+    type: TaskType.calendar,
+    title: "Go to party",
+    description: "Attend to party",
+    isCompleted: false,
+  ),
+  Task(
+    type: TaskType.contest,
+    title: "Run 5K",
+    description: "Run 5 kilometers",
+    isCompleted: false,
+  ),
+];
 
+List<Task> completed = [
+  Task(
+    type: TaskType.calendar,
+    title: "Game meetup",
+    description: "Attend to party",
+    isCompleted: false,
+  ),
+  Task(
+    type: TaskType.contest,
+    title: "Take out trash",
+    description: "Run 5 kilometers",
+    isCompleted: false,
+  ),
+];
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -26,7 +62,7 @@ class HomeScreen extends StatelessWidget {
           body: Column(
             children: [
               Container(
-                height: deviceHeight / 3,
+                height: deviceHeight / 6 + 122,
                 width: deviceWidth,
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -72,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: todo.length,
                       itemBuilder: (context, index) {
-                        return TodoItem(title: todo[index]);
+                        return TodoItem(task: todo[index]);
                       },
                     ),
                   ),
@@ -97,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: completed.length,
                       itemBuilder: (context, index) {
-                        return TodoItem(title: completed[index]);
+                        return TodoItem(task: completed[index]);
                       },
                     ),
                   ),
@@ -106,7 +142,7 @@ class HomeScreen extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => AddNewTaskScreen(),)
+                    MaterialPageRoute(builder: (context) => AddNewTaskScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(

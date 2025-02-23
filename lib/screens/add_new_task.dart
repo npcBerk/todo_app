@@ -55,11 +55,9 @@ class AddNewTaskScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              Text("Task Title"),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30.0,
-                  vertical: 20.0,
-                ),
+                padding: const EdgeInsets.fromLTRB(30, 5, 30, 20),
                 child: TextField(
                   decoration: InputDecoration(
                     filled: true,
@@ -136,9 +134,17 @@ class AddNewTaskScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
-                    isDense: true
+                    isDense: true,
                   ),
                 ),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: HexColor(headerColor),
+                  foregroundColor: Colors.white,
+                ),
+                child: Text("Save"),
               ),
             ],
           ),
