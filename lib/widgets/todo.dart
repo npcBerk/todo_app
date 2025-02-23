@@ -23,10 +23,10 @@ class _TodoItemState extends State<TodoItem> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             widget.task.type == TaskType.notes
-                ? Image.asset("lib/assets/images/category_study.png")
+                ? Image.asset("lib/assets/images/category_notes.png")
                 : widget.task.type == TaskType.calendar
-                ? Image.asset("lib/assets/images/category_activity.png")
-                : Image.asset("lib/assets/images/category_sport.png"),
+                ? Image.asset("lib/assets/images/category_calendar.png")
+                : Image.asset("lib/assets/images/category_contest.png"),
             //const Icon(Icons.library_books_outlined, size: 50),
             Expanded(
               child: Column(

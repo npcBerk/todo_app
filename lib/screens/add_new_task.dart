@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:todo_app/constants/color.dart';
+import 'package:todo_app/constants/task_type.dart';
 import 'package:todo_app/widgets/category_selection_widget.dart';
 
-List<String> categories = ["study", "sport", "activity"];
 
-class AddNewTaskScreen extends StatelessWidget {
+class AddNewTaskScreen extends StatefulWidget {
   const AddNewTaskScreen({super.key});
+
+  @override
+  State<AddNewTaskScreen> createState() => _AddNewTaskScreenState();
+}
+
+class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
+  TextEditingController titleController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+  TaskType taskType = TaskType.notes;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +71,7 @@ class AddNewTaskScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 5, 30, 20),
                 child: TextField(
+                  controller: titleController,
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
@@ -73,15 +86,22 @@ class AddNewTaskScreen extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      color: Colors.red,
+                      color: Colors.red, //Test amaçlıdır
                       height: 50,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: categories.length,
+                        itemCount: TaskType.values.length,
                         itemBuilder: (context, index) {
                           return Container(
                             padding: EdgeInsets.only(right: 10),
-                            child: CategorySelection(title: categories[index]),
+                            child: CategorySelection(
+                              type: TaskType.values[index],
+                              onSelected: () {
+                                setState(() {
+                                  taskType = TaskType.values[index];
+                                });
+                              },
+                            ),
                           );
                         },
                       ),
@@ -98,6 +118,7 @@ class AddNewTaskScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: TextField(
+                            controller: dateController,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -114,6 +135,7 @@ class AddNewTaskScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: TextField(
+                            controller: timeController,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -125,10 +147,11 @@ class AddNewTaskScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Text("Notes"),
+              Text("Description"),
               SizedBox(
                 height: 300,
                 child: TextField(
+                  controller: descriptionController,
                   expands: true,
                   maxLines: null,
                   decoration: InputDecoration(
